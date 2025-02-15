@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Trading Game</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .balance { font-size: 24px; margin: 10px; }
+        .colors { display: flex; justify-content: center; margin: 20px; }
+        .color-btn { padding: 20px; margin: 5px; font-size: 18px; cursor: pointer; border: none; }
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+        .deposit { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Color Trading Game</h1>
+    <div class="balance">Balance: ₹<span id="balance">100</span></div>
+    <div class="colors">
+        <button class="color-btn red" onclick="placeBet('red')">Red</button>
+        <button class="color-btn green" onclick="placeBet('green')">Green</button>
+        <button class="color-btn blue" onclick="placeBet('blue')">Blue</button>
+    </div>
+    <button class="deposit" onclick="window.location.href='deposit.html'">Deposit</button>
+
+    <script>
+        let balance = 100;
+
+        function placeBet(color) {
+            if (balance < 10) {
+                alert("Not enough balance!");
+                return;
+            }
+
+            balance -= 10;
+            document.getElementById('balance').innerText = balance;
+
+            let resultColor = ['red', 'green', 'blue'][Math.floor(Math.random() * 3)];
+
+            if (color === resultColor) {
+                balance += 30;
+                alert("You won! New Balance: ₹" + balance);
+            } else {
+                alert("You lost! Try again.");
+            }
+
+            document.getElementById('balance').innerText = balance;
+        }
+    </script>
+</body>
+</html>
